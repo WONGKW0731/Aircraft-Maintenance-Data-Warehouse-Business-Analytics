@@ -78,51 +78,11 @@ The `scd2_technician_dim.sql` script preserves history by inserting a new record
 
 The following SQL queries in the `reports/` folder generate key insights:
 
-1. **Top 5 Airports by Maintenance Cost**  
-2. **Maintenance Cost & Event Count by Year**  
-3. **Comparative Analysis of Maintenance Items**  
-4. **Aircraft Reliability & Cost Metrics** (MTBF, MTTR, availability trends)  
-5. **Top 10 Technicians by Average Wage per Call**  
+1. **Comparative Analysis of Maintenance Items**  
+2. **Aircraft Reliability & Cost Metrics** (MTBF, MTTR, availability trends)
+3. Comparative Report: Maintenance Cost & Utilization a year-over-year
+4. **Top 5 Airports by Maintenance Cost**  
+5. **Maintenance Cost & Event Count by Year**  
+6. **Top 10 Technicians by Average Wage per Call**  
 
 ---
-
-## How to Use
-
-1. **Prerequisites:**  
-   - Oracle Database (or compatible SQL‐based database)  
-   - SQL client or IDE  
-
-2. **Setup:**  
-   ```sh
-   # Create schema
-   sqlplus user/password@db @sql/create_tables.sql
-
-   # Initial ETL
-   sqlplus user/password@db @sql/etl_initial_load.sql
-
-
-3. **Scheduling Incremental Loads:**
-   Configure your job scheduler (e.g., Oracle DBMS\_SCHEDULER or cron) to run:
-
-   ```sh
-   sqlplus user/password@db @sql/etl_incremental_load.sql
-   ```
-
-4. **Generate Reports:**
-   Open and execute the SQL files under `reports/` to view analytics.
-
----
-
-## Files
-
-* **RDS2S3G1\_TRM\_WKW\_LK.docx**: Complete project report (design diagrams, scripts, analysis).
-* **README.md**: This overview.
-
----
-
-## License
-
-This project is released under the MIT License. See [LICENSE](LICENSE) for details.
-
-```
-```
