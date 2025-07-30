@@ -1,83 +1,128 @@
+Below is a suggested GitHub README.md structure using your existing project description. You can copy this into your repository’s README.md and adjust any links or commands as needed.
+
+```markdown
 # Aircraft Maintenance Data Warehouse & Business Analytics
 
-This repository contains the documentation and scripts for a data warehouse project focused on aircraft maintenance data. The project was completed as part of the **BAIT 3003 Data Warehouse Technology** course at Tunku Abdul Rahman University College.
+This repository contains the documentation and scripts for a data‑warehouse project focused on aircraft maintenance data. The project was completed as part of the **BAIT 3003 Data Warehouse Technology** course at Tunku Abdul Rahman University College.
+
+---
 
 ## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Project Team](#project-team)
-3. [Project Structure](#project-structure)
-   - [Chapter 1: Data Warehouse Design](#chapter-1-data-warehouse-design)
-   - [Chapter 2: ETL Process](#chapter-2-etl-process)
-   - [Chapter 3: Business Analytics Reports](#chapter-3-business-analytics-reports)
-4. [Prerequisites](#prerequisites)
-5. [Installation & Usage](#installation--usage)
-6. [File Overview](#file-overview)
-7. [License](#license)
+
+1. [Project Overview](#project-overview)  
+2. [Team Members](#team-members)  
+3. [Repository Structure](#repository-structure)  
+4. [Data Warehouse Design](#data-warehouse-design)  
+   - [Logical Design](#logical-design)  
+   - [Physical Design](#physical-design)  
+5. [ETL Process](#etl-process)  
+   - [Initial Loading](#initial-loading)  
+   - [Incremental Loading](#incremental-loading)  
+   - [SCD Type 2 for TECHNICIAN_DIM](#scd-type-2-for-technician_dim)  
+6. [Business Analytics Reports](#business-analytics-reports)  
+7. [How to Use](#how-to-use)  
+8. [Files](#files)  
+9. [License](#license)  
+
+---
 
 ## Project Overview
 
 The primary goal of this project is to design and implement a data warehouse to analyze aircraft maintenance costs, technician performance, and operational trends. The system supports business analytics by providing insightful reports on various aspects of maintenance operations.
 
-## Project Structure
+---
 
-### Chapter 1: Data Warehouse Design
+## Data Warehouse Design
 
-- **Logical Design**: Implements a star schema with a central `MAINTENANCE_COST` fact table and the following dimensions:
-  - `DATE_DIM`
-  - `TECHNICIAN_DIM` (with SCD Type 2)
-  - `AIRCRAFT_DIM`
-  - `AIRPORT_DIM`
+### Logical Design
 
-- **Physical Design**: SQL `CREATE TABLE` scripts defining data types, constraints, primary keys, and foreign key relationships.
+- **Fact Table:** `MAINTENANCE_COST`  
+- **Dimension Tables:**  
+  - `TECHNICIAN_DIM` (with SCD Type 2)  
+  - `DATE_DIM`  
+  - `AIRCRAFT_DIM`  
+  - `AIRPORT_DIM`  
 
-### Chapter 2: ETL Process
+The schema follows a star‑schema model optimized for query performance and analytic workloads.
 
-- **Initial Loading**: Scripts for first-time population of dimension and fact tables from the source database.
-- **Incremental Loading**: Scripts for subsequent data updates without disrupting existing records.
-- **SCD Type 2**: Procedures to manage slowly changing attributes in `TECHNICIAN_DIM`, preserving historical records.
+### Physical Design
 
-### Chapter 3: Business Analytics Reports
+The `create_tables.sql` script defines:
 
-A suite of SQL queries and reports to analyze:
+- Column data types  
+- Primary and foreign key constraints  
+- Indexes for performance tuning  
 
-- Top 5 Airports by Maintenance Cost (with top 3 maintenance items breakdown)
-- Yearly Maintenance Cost and Event Counts
-- Comparative Analysis of Maintenance Items Across Years
-- Aircraft Reliability Metrics (MTBF, MTTR, Availability) and Cost Trends by Model
-- Top 10 Technicians by Average Wage Per Call
+---
 
-## Prerequisites
+## ETL Process
 
-- Oracle Database (or compatible SQL-based RDBMS)
-- SQL Client or IDE (e.g., SQL Developer, DBeaver)
+### Initial Loading
 
-## Installation & Usage
+Use `etl_initial_load.sql` to perform the first‐time population of dimension and fact tables from the source system.
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/your_org/aircraft-maintenance-dw.git
-   cd aircraft-maintenance-dw
+### Incremental Loading
 
+Run `etl_incremental_load.sql` on a scheduled basis to append new maintenance records without impacting existing historical data.
 
-2. **Configure Database Connection**
+### SCD Type 2 for TECHNICIAN_DIM
 
-   * Update connection settings in the ETL scripts to match your environment.
+The `scd2_technician_dim.sql` script preserves history by inserting a new record whenever technician attributes change, using:
 
-3. **Create Schema & Tables**
+- Effective dates  
+- Current‐flag indicators  
 
-   * Execute the `CREATE TABLE` scripts located in the `chapter1/design/` directory.
+---
 
-4. **Populate Data Warehouse**
+## Business Analytics Reports
 
-   * Run the initial load scripts in `chapter2/etl/initial_load/`.
-   * Schedule or invoke the incremental load scripts in `chapter2/etl/incremental/`.
+The following SQL queries in the `reports/` folder generate key insights:
 
-5. **Generate Reports**
+1. **Top 5 Airports by Maintenance Cost**  
+2. **Maintenance Cost & Event Count by Year**  
+3. **Comparative Analysis of Maintenance Items**  
+4. **Aircraft Reliability & Cost Metrics** (MTBF, MTTR, availability trends)  
+5. **Top 10 Technicians by Average Wage per Call**  
 
-   * Use the SQL queries provided in `chapter3/reports/` to generate business analytics insights.
+---
 
-## File Overview
-* **README.md**: Project overview and usage guidelines.
-* **chapter1/**: Data warehouse design scripts and documentation.
-* **chapter2/**: ETL process scripts (initial and incremental load).
-* **chapter3/**: SQL reports and analytics queries.
+## How to Use
+
+1. **Prerequisites:**  
+   - Oracle Database (or compatible SQL‐based database)  
+   - SQL client or IDE  
+
+2. **Setup:**  
+   ```sh
+   # Create schema
+   sqlplus user/password@db @sql/create_tables.sql
+
+   # Initial ETL
+   sqlplus user/password@db @sql/etl_initial_load.sql
+````
+
+3. **Scheduling Incremental Loads:**
+   Configure your job scheduler (e.g., Oracle DBMS\_SCHEDULER or cron) to run:
+
+   ```sh
+   sqlplus user/password@db @sql/etl_incremental_load.sql
+   ```
+
+4. **Generate Reports:**
+   Open and execute the SQL files under `reports/` to view analytics.
+
+---
+
+## Files
+
+* **RDS2S3G1\_TRM\_WKW\_LK.docx**: Complete project report (design diagrams, scripts, analysis).
+* **README.md**: This overview.
+
+---
+
+## License
+
+This project is released under the MIT License. See [LICENSE](LICENSE) for details.
+
+```
+```
