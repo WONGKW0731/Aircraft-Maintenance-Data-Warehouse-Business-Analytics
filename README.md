@@ -1,6 +1,6 @@
 Below is a suggested GitHub README.md structure using your existing project description. You can copy this into your repository’s README.md and adjust any links or commands as needed.
 
-```markdown
+
 # Aircraft Maintenance Data Warehouse & Business Analytics
 
 This repository contains the documentation and scripts for a data‑warehouse project focused on aircraft maintenance data. The project was completed as part of the **BAIT 3003 Data Warehouse Technology** course at Tunku Abdul Rahman University College.
@@ -99,7 +99,7 @@ The following SQL queries in the `reports/` folder generate key insights:
 
    # Initial ETL
    sqlplus user/password@db @sql/etl_initial_load.sql
-````
+
 
 3. **Scheduling Incremental Loads:**
    Configure your job scheduler (e.g., Oracle DBMS\_SCHEDULER or cron) to run:
