@@ -1,4 +1,3 @@
-````markdown
 # Aircraft Maintenance Data Warehouse & Business Analytics
 
 This repository contains the documentation and scripts for a data warehouse project focused on aircraft maintenance data. The project was completed as part of the **BAIT 3003 Data Warehouse Technology** course at Tunku Abdul Rahman University College.
@@ -58,7 +57,7 @@ A suite of SQL queries and reports to analyze:
    ```bash
    git clone https://github.com/your_org/aircraft-maintenance-dw.git
    cd aircraft-maintenance-dw
-````
+
 
 2. **Configure Database Connection**
 
